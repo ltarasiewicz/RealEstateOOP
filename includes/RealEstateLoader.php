@@ -38,11 +38,11 @@ class RealEstateLoader
     public function run() {
         
         foreach ($this->filters as $hook) {
-            addFilter($hook['hook'], array($hook['component'], $hook['callback']));
+            add_filter($hook['hook'], array($hook['component'], $hook['callback']));
         }
         
         foreach ($this->actions as $hook) {
-            addAction($hook['hook'], array($hook['component'], $hook['callback']));
+            add_action($hook['hook'], array($hook['component'], $hook['callback']));
         }        
         
     }

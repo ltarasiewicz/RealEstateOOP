@@ -15,8 +15,8 @@ if ( ! defined( 'WPINC' ) ) {
 require_once plugin_dir_path(__FILE__) . 'includes/RealEstateCore.php';
 
 function runRealEstateCore() {
-    $spmm = new RealEstateCore();
-    $spmm->run();    
+    $rec = new RealEstateCore();
+    $rec->run();    
 }
 
 runRealEstateCore();

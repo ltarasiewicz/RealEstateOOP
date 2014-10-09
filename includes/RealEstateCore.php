@@ -29,6 +29,7 @@ class RealEstateCore
     public function defineAdminHooks() {
         
         $admin = new RealEstateAdmin($this->getVersion());
+        
         $this->loader->addAction('admin_enqueue_scripts', $admin, 'enqueueStyles');
         $this->loader->addAction('add_meta_boxes', $admin, 'addMetaBoxes');
         
