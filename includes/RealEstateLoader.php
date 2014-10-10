@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Class responsible for coordinating actions and filters between the core 
+ * plugin class (RealEstateCore) and administration (admin) classes
+ */
 class RealEstateLoader
 {
     protected $actions;

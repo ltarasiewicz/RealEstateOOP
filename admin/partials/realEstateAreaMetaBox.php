@@ -1,13 +1,9 @@
-<div id="realEstateAreaMetaBox">
+<div class="metaBox">
  
-    <?php $post_meta = get_post_meta( get_the_ID() ); ?>
-    <table id="single-post-meta-manager-data">
-    <?php foreach ( $post_meta as $post_meta_key => $post_meta_value ) { ?>
+    <table id="realEstateAreaMetaBoxData">
         <tr>
-            <td class="key"><?php echo $post_meta_key; ?></td>
-            <td class="value"><?php print_r( $post_meta_value[0] ); ?></td>
+            <td><input type="text" size="80" name="realEstateArea" value="<?php echo $area; ?>" />m<sup>2</sup></td>
         </tr>
-    <?php } ?>
     </table>
  
-</div><!-- #single-post-meta-manager -->
+</div>
