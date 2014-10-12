@@ -17,7 +17,7 @@ class Database {
         
         $this->loadDependancies();
         
-        $this->validator = new Validator;
+        $this->validator = new Validator($this->version);
         
     }   
     
@@ -30,7 +30,7 @@ class Database {
     {
         
         if( count($_POST) && get_post_type($id) == 'real_estate' ) {
-        
+                      
             $area = esc_html(get_post_meta($id, 'real_estate_area', true));
             $price = esc_html(get_post_meta($id, 'real_estate_price', true));
             $address = esc_html(get_post_meta($id, 'real_estate_address', true));
@@ -53,34 +53,75 @@ class Database {
 
             update_post_meta($id, 'real_estate_address', $new_address, $address);
             
-//            $file = $_FILES['realEstatePicture'];                        
-//            unset($_FILES);
-//            $fileSplit;
-//            
-//            $numberOfFiles = sizeof($file['name']);           
-// 
-//            for($i=0; $i<$numberOfFiles; $i++){
-//                
-//                    $fileSplit[$i]['name'] = $file['name'][$i];
-//                    $fileSplit[$i]['type'] = $file['type'][$i];
-//                    $fileSplit[$i]['tmp_name'] = $file['tmp_name'][$i];
-//                    $fileSplit[$i]['error'] = $file['error'][$i];
-//                    $fileSplit[$i]['name'] = $file['name'][$i];
-//                    $fileSplit[$i]['size'] = $file['size'][$i];
-//            }
-//            
-//            for($i=0; $i<numberOfFiles; $i++) {
-//                
-//                $_FILES['realEstatePicture'] = $fileSplit[$i];
-//                media_handle_upload('realEstatePicture', $_POST['postID']);
-//                
-//            }
             
             $attachmentId = media_handle_upload('realEstatePicture', $_POST['postID']);
             
-                                    
+            
         }
         
+    }
+    
+    public function ajaxFormInsert()
+    {
+        global $wpdb;
+
+        $title = esc_textarea($_POST['realEstateTitle']);
+        $price = intval($_POST['realEstatePrice']);
+        $area = intval($_POST['realEstateArea']);
+        $address = esc_textarea($_POST['realEstateAddress']);
+        $description = esc_textarea($_POST['realEstateDescription']);
+        $type = intval($_POST['realEstateType']);
+        $date = current_time('mysql');
+
+        $data = array(
+            'post_author' => 2,
+            'post_date' => $date,
+            'post_content' =>   $description,
+            'post_title'    =>  $title,
+            'post_status'   =>  'draft',
+            'post_type' =>  'real_estate',
+            'post_name' =>  sanitize_title($title)        
+        );
+
+        $postsTable = $wpdb->prefix . 'posts';
+
+        $wpdb->insert($postsTable, $data);
+
+        $newPostID = $wpdb->insert_id;
+
+        $metaPrice = array(
+            'post_id'   =>  $newPostID,
+            'meta_key'  =>  'real_estate_price',
+            'meta_value'    =>  $price
+        );
+
+        $metaArea = array(
+            'post_id'   =>  $newPostID,
+            'meta_key'  =>  'real_estate_area',
+            'meta_value'    =>  $area        
+        );
+
+        $metaAddress = array(
+            'post_id'   =>  $newPostID,
+            'meta_key'  =>  'real_estate_address',
+            'meta_value'    =>  $address
+        );
+
+        $taxonomy = array(
+            'object_id' =>  $newPostID,
+            'term_taxonomy_id'  =>  $type,
+        );
+
+        $metaTable = $wpdb->prefix . 'postmeta';
+        $taxonomyTable = $wpdb->prefix . 'term_relationships';
+        $wpdb->insert($metaTable, $metaPrice);
+        $wpdb->insert($metaTable, $metaArea);
+        $wpdb->insert($metaTable, $metaAddress);
+        $wpdb->insert($taxonomyTable, $taxonomy);   
+        
+        media_handle_upload('realEstatePicture', $newPostID);
+        
+        die();
     }
     
 }

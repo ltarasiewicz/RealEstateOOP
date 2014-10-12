@@ -8,6 +8,14 @@
  */
 class Validator {
         
+    protected $version;
+    
+    public function __construct($version) 
+    {
+        $this->version = $version;
+    }
+
+
     /**
      * Method checks if input is a numeric value
      */
@@ -22,4 +30,39 @@ class Validator {
         return false;
         
     }    
+    
+    public function ajaxFormCheck()
+    {
+        $error = '';
+
+        if ($_POST['realEstateTitle'] != esc_textarea($_POST['realEstateTitle']) 
+                || $_POST['realEstateTitle'] == '') {
+            $error[] = 'realEstateTitle';       
+        }
+        if (filter_var( $_POST['realEstatePrice'], FILTER_SANITIZE_NUMBER_INT) != $_POST['realEstatePrice'] 
+                || $_POST['realEstatePrice'] == '') {
+            $error[] = 'realEstatePrice';       
+        }    
+        if (filter_var( $_POST['realEstateArea'], FILTER_SANITIZE_NUMBER_INT) != $_POST['realEstateArea'] 
+                || $_POST['realEstateArea'] == '') {
+            $error[] = 'realEstateArea';       
+        }    
+        if ($_POST['realEstateAddress'] != esc_textarea($_POST['realEstateAddress']) 
+                || $_POST['realEstateAddress'] == '') {
+            $error[] = 'realEstateAddress';       
+        }    
+        if ($_POST['realEstateDescription'] != esc_textarea($_POST['realEstateDescription']) 
+                || $_POST['realEstateDescription'] == '') {
+            $error[] = 'realEstateDescription';       
+        }
+//        if ($_POST['realEstateType'] == '') {
+//            $error[] = 'realEstateType';       
+//        }   
+        
+        echo $_POST['realEstatePicture'];
+        
+        echo json_encode($error);
+
+        die();        
+    }
 }

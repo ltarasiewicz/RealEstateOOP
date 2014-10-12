@@ -11,3 +11,18 @@ and open the template in the editor.
 .metaBox {
     width:  100%;
 }
+
+#pictureBox {
+    float: left;
+}
+
+.checkboxBox {
+    margin: 10px auto; 
+    text-align: center;
+}
+
+.clearfix:after {
+    clear: both;
+    content: "";
+    display: block;
+}

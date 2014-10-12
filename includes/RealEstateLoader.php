@@ -8,6 +8,7 @@ class RealEstateLoader
 {
     protected $actions;
     protected $filters;
+    protected $shortcodes;
     
     public function __construct() {
         
@@ -26,6 +27,12 @@ class RealEstateLoader
         $this->filters = $this->add($this->filters, $hook, $component, $callback);   
         
     }
+    
+    public function addShortcode($hook, $component, $callback) {
+        
+        $this->shortcodes = $this->add($this->shortcodes, $hook, $component, $callback);   
+        
+    }    
     
     public function add($hooks, $hook, $component, $callback) {
         
@@ -47,7 +54,11 @@ class RealEstateLoader
         
         foreach ($this->actions as $hook) {
             add_action($hook['hook'], array($hook['component'], $hook['callback']));
-        }        
+        }     
+        
+        foreach ($this->shortcodes as $hook) {
+            add_shortcode($hook['hook'], array($hook['component'], $hook['callback']));
+        }
         
     }
 }

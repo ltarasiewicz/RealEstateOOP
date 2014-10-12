@@ -24,4 +24,15 @@ class GeneralAdmin {
         echo 'enctype="multipart/form-data"';
     }
     
+    public function createSingleTemplate($singleTemplate) 
+    {
+        if (get_post_type() == 'real_estate') {
+            $singleTemplate = plugin_dir_path(dirname(__FILE__)) . 'single-real_estate.php';
+        }
+        
+        return $singleTemplate;
+        
+    }
+    
+    
 }
