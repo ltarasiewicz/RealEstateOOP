@@ -17,9 +17,10 @@
 		<?php if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && twentyfourteen_categorized_blog() ) : ?>
 		<div class="entry-meta">
 			<span class="cat-links"><?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'twentyfourteen' ) ); ?></span>
-
+                        
                 </div>
 		<?php
+                    
 			endif;
 
 			if ( is_single() ) :
@@ -53,7 +54,7 @@
 	<div class="entry-content">
 		<?php    
                         // Show post metadata
-                
+
                         $price = get_post_meta( get_the_ID(), "real_estate_price", true);
                         
                         

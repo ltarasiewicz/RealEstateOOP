@@ -1,5 +1,5 @@
-<form id="ajaxForm">
-    <input name="action" type="hidden" value="realEstateForm" />      
+<form id="ajaxForm" method="post">
+          
     <table>
         <tr>
             <td> Tytuł:</td>               
@@ -37,11 +37,11 @@
         </tr>
         <tr>
             <td> Zdjęcia:</td>
-            <td>
-                <input name="realEstatePicture" id="realEstatePicture" type="hidden" value="" />
-                <div id="fileUploader">Upload</div>
+            <td>                       
+                <input name="realEstatePicture" id="realEstatePicture" type="file" />
             </td>
         </tr>            
     </table>
+    <input name="action" type="hidden" value="realEstateForm" />
     <input id="res" class="button" type="submit" name="res" value="Wyślij"/>
 </form>

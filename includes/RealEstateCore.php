@@ -41,7 +41,7 @@ class RealEstateCore
         require_once plugin_dir_path(dirname(__FILE__)) . 'helpers/helpers.php';
         
         require_once plugin_dir_path(__FILE__) . 'RealEstateLoader.php';
-        
+               
         $this->loader = new RealEstateLoader();
         
     }

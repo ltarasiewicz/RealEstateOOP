@@ -54,13 +54,13 @@ class Validator {
         if ($_POST['realEstateDescription'] != esc_textarea($_POST['realEstateDescription']) 
                 || $_POST['realEstateDescription'] == '') {
             $error[] = 'realEstateDescription';       
-        }
+        }      
+              
+        
 //        if ($_POST['realEstateType'] == '') {
 //            $error[] = 'realEstateType';       
 //        }   
-        
-        echo $_POST['realEstatePicture'];
-        
+                
         echo json_encode($error);
 
         die();        

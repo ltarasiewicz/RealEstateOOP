@@ -39,15 +39,15 @@ class Enqueue
     
     public function enqueueUploader()
     {
-        wp_enqueue_style('uploaderCSS', plugins_url('', dirname(__FILE__)) . '/js/uploader/uploadfile.css', array(), '12102014');
-        wp_enqueue_script('uploader', plugins_url('', dirname(__FILE__)) . '/js/uploader/jquery.uploadfile.min.js', array('jquery'), '12102014');
+        //wp_enqueue_style('uploaderCSS', plugins_url('', dirname(__FILE__)) . '/js/uploader/uploadfile.css', array(), '12102014');
+        wp_enqueue_script('uploader', plugins_url('', dirname(__FILE__)) . '/js/uploader/jquery.form.js', array('jquery'), '13102014');
         
     }
     
     public function ajaxFormEnqueue() 
     {
         wp_enqueue_script('jquery');
-        wp_enqueue_script('ajaxformjs', plugins_url('', dirname(__FILE__)) . '/js/ajaxform.js', array('jquery'));
+        wp_enqueue_script('ajaxformjs', plugins_url('', dirname(__FILE__)) . '/js/uploader/jquery.form.js', array('jquery'));
 
         $localize = array(
             'ajaxurl'  =>   admin_url('admin-ajax.php')
